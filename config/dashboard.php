@@ -48,6 +48,18 @@ return [
             'refresh_interval_in_seconds' => 60,
         ],
         'cryptowatch' => [
+            'btcgbp_4h' => [
+                'exchange' => 'kraken',
+                'currency_pair' => 'btcgbp',
+                'time_period' => '4h',
+                'title' => 'CryptoWatch Kraken BTC-GBP 4 Hours'
+            ],
+            'btcgbp_1d' => [
+                'exchange' => 'kraken',
+                'currency_pair' => 'btcgbp',
+                'time_period' => '1d',
+                'title' => 'CryptoWatch Kraken BTC-GBP 1 Day'
+            ],
             'refresh_interval_in_seconds' => 60,
         ]
     ],

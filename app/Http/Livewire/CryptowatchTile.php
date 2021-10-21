@@ -10,9 +10,9 @@ class CryptowatchTile extends Component
     /** @var string */
     public $position;
 
-    public $exchange = 'kraken';
-    public $currencyPair = 'btcgbp';
-    public $timePeriod = '4h';
+    public $exchange = null;
+    public $currencyPair = null;
+    public $timePeriod = null;
     public $configuration = null;
     public $title = null;
 
@@ -23,10 +23,10 @@ class CryptowatchTile extends Component
     {
         $this->position = $position;
         $this->configuration = $configuration;
-        $this->currencyPair = config('dashboard.tiles.cryptowatch.' . $configuration . '.currency_pair') ?? $this->currencyPair;
-        $this->exchange = config('dashboard.tiles.cryptowatch.' . $configuration . '.exchange') ?? $this->exchange;
-        $this->timePeriod = config('dashboard.tiles.cryptowatch.' . $configuration . '.time_period') ?? $this->timePeriod;
-        $this->title = config('dashboard.tiles.cryptowatch.' . $configuration . '.title') ?? 'CryptoWatch Kraken BTC-GBP 4h';
+        $this->currencyPair = config('dashboard.tiles.cryptowatch.' . $configuration . '.currency_pair');
+        $this->exchange = config('dashboard.tiles.cryptowatch.' . $configuration . '.exchange');
+        $this->timePeriod = config('dashboard.tiles.cryptowatch.' . $configuration . '.time_period');
+        $this->title = config('dashboard.tiles.cryptowatch.' . $configuration . '.title');
     }
 
     public function render()
