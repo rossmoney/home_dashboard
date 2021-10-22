@@ -11,3 +11,11 @@ html,body {
     margin-top:0;
     margin-bottom:0;
 }
+
+.green-text {
+    color: darkgreen;
+}
+
+.red-text {
+    color: red;
+}

@@ -20,21 +20,6 @@ return [
         'lng' => -2.0181104,
     ],
 
-    /*
-     * These scripts will be loaded when the dashboard is displayed.
-     */
-    'scripts' => [
-        'alpinejs' => 'https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js',
-    ],
-
-    /*
-     * These stylesheets will be loaded when the dashboard is displayed.
-     */
-    'stylesheets' => [
-        'inter' => 'https://rsms.me/inter/inter.css',
-        'tailwind' => 'https://unpkg.com/tailwindcss@0.3.0/dist/tailwind.min.css'
-    ],
-
     'tiles' => [
         'time_weather' => [
             'open_weather_map_key' => env('OPEN_WEATHER_MAP_KEY'),
@@ -59,6 +44,15 @@ return [
                 'currency_pair' => 'btcgbp',
                 'time_period' => '1d',
                 'title' => 'CryptoWatch Kraken BTC-GBP 1 Day'
+            ],
+            'refresh_interval_in_seconds' => 60,
+        ],
+        "train_times" => [
+            'hnf_to_bhm' => [ 
+                'origin_station' => 'Hednesford',
+                'destination_station' => 'Birmingham New Street',
+                'data' => 'departures',
+                'title' => 'Train Departures Hednesford > Birmingham NS'
             ],
             'refresh_interval_in_seconds' => 60,
         ]

@@ -11,7 +11,12 @@
 
         @stack('assets')
 
-        <livewire:styles />
+        <link rel="stylesheet" href="{{ asset('css/wallboard.css') }}">
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+        <link rel="stylesheet" href="https://unpkg.com/tailwindcss@0.3.0/dist/tailwind.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+
+        <script src="https://static.cryptowat.ch/assets/scripts/embed.bundle.js"></script>
     </head>
     <body class="leading-snug">
         <div
@@ -25,8 +30,6 @@
                 {{ $slot }}
             </div>
         </div>
-
-        <livewire:scripts />
 
         <script src="https://kit.fontawesome.com/25563b37c3.js" crossorigin="anonymous"></script>
 
