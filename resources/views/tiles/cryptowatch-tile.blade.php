@@ -7,13 +7,13 @@
     <div style="height: 380px; overflow: hidden;" id="cryptowatch-container-{{ $configuration }}"></div>
 
     <script type="text/javascript">
-    {{--var chart = new cryptowatch.Embed('{{ $exchange }}', '{{ $currencyPair }}', {
+    var chart = new cryptowatch.Embed('{{ $exchange }}', '{{ $currencyPair }}', {
         timePeriod: '{{ $timePeriod ?? '1d' }}',
         //width: 650,
         height: 500,
         presetColorScheme: 'delek'
     });
-    chart.mount('#cryptowatch-container-{{ $configuration }}');--}}
+    chart.mount('#cryptowatch-container-{{ $configuration }}');
     </script>
     @endif
 

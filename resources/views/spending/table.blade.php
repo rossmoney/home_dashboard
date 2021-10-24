@@ -6,6 +6,7 @@
         <th scope="col">Category</th>
         <th scope="col">Who?</th>
         <th scope="col">When?</th>
+        <th scope="col" width="30"></th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +17,13 @@
         <td>{{ $line->category }}</td>
         <td>{{ $line->user }}</td>
         <td>{{ date("d/m", strtotime($line->date)) }}</td>
+        <td>
+            <form method="post" action="{{ url('spending/' . $line->id) }}">
+                @csrf
+                {{ method_field('DELETE') }}
+                <button type="submit" class="btn btn-sm btn-danger">x</button>
+            </form>
+        </td>
       </tr>
     @endforeach
     </tbody>

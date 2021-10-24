@@ -44,4 +44,11 @@ class SpendingController extends Controller
 
         return redirect()->back()->with(['success' => 'Saved Spend']);
     }
+    
+    public function destroy(Spend $spending)
+    {
+        $spending->delete();
+
+        return redirect()->back()->with(['success' => 'Spend deleted.']);
+    }
 }

@@ -25,7 +25,7 @@ class Spend extends Model
 
     public static function byMonth(int $month)
     {
-        return This::select(DB::raw('IF(spends.user_id = 2, (spends.cost * -1), spends.cost) AS cost'), 'date', 'desc', 'users.name as user', 'spending_categories.name as category')
+        return This::select('spends.id', DB::raw('IF(spends.user_id = 2, (spends.cost * -1), spends.cost) AS cost'), 'date', 'desc', 'users.name as user', 'spending_categories.name as category')
             ->whereMonth('date', '=', $month)
             ->whereYear('date', '=', date('Y'))
             ->leftJoin('users', 'users.id', '=', 'spends.user_id')
