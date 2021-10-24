@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\SpendingController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Auth::routes();
 
 $files = collect(File::files(base_path() . '/resources/views/dashboards'));
 
@@ -31,3 +35,9 @@ for ($i = 1; $i <= $dashboards; $i++) {
         return view('dashboards.' . $i);
     });    
 }
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::resource('spending', SpendingController::class);
+
+});

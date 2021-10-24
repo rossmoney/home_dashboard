@@ -50,7 +50,7 @@ class TrainTimesCommand extends Command
     public function handle()
     {
         date_default_timezone_set("Europe/London");
-        
+
         $tileConfigurations =  config('dashboard.tiles.train_times');
         foreach($tileConfigurations as $configurationName => $configuration)
         {

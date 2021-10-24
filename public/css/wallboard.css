@@ -10,12 +10,13 @@ html,body {
     height:100%;
     margin-top:0;
     margin-bottom:0;
+    background-color: #212529;
 }
 
-.green-text {
-    color: darkgreen;
+.table td {
+    font-size: 14px !important;
 }
 
-.red-text {
-    color: red;
+.table th {
+    font-size: 14px !important;
 }

@@ -1,0 +1,11 @@
+.green-text {
+    color: darkgreen;
+}
+
+.red-text {
+    color: red;
+}
+
+html,body {
+    background-color: #212529;
+}

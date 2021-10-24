@@ -13,7 +13,7 @@ $(window).ready(function(){
   $(".slider").hide();
 
   nextDashboard();
-  loopSlider();
+  //loopSlider();
 });
 
 function nextDashboard()

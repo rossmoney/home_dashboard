@@ -1,10 +1,10 @@
 <x-dashboard-tile :position="$position" refresh-interval="{{ $refreshInterval }}">
     @if(!empty($title))
-        <h4 class="mb-4 font-bold">{{ $title }}</h4>
+        <h6 class="mb-2 font-bold">{{ $title }}</h6>
     @endif
 
     @if(!empty($trains))
-    <table class="table table-striped table-dark border-2">
+    <table class="table table-sm table-striped table-dark border-2">
         <thead>
           <tr>
             <th scope="col">Time</th>

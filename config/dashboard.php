@@ -54,6 +54,18 @@ return [
                 'data' => 'departures',
                 'title' => 'Train Departures Hednesford > Birmingham NS'
             ],
+            'hnf_to_eus' => [ 
+                'origin_station' => 'Hednesford',
+                'destination_station' => 'London Euston',
+                'data' => 'departures',
+                'title' => 'Train Departures Hednesford > London Euston'
+            ],
+            'refresh_interval_in_seconds' => 60,
+        ],
+        "spending" => [
+            'default' => [
+                'title' => 'Spending'
+            ],
             'refresh_interval_in_seconds' => 60,
         ]
     ],

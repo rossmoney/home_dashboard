@@ -1,9 +1,4 @@
-@extends('layouts.app')
-
-@section('js')
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-    <script src="js/carousel.js"></script>
-@endsection
+@extends('layouts.dashboard')
 
 @section('content')
 <div class="sliderAx h-auto">
