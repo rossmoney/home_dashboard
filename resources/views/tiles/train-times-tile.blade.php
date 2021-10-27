@@ -16,8 +16,8 @@
         </thead>
         <tbody>
           @foreach($trains as $train)
-          <tr>
-            <th scope="row"><span class="{{ $train['tooLateToLeave'] ? 'red-text' : '' }}">{{ $train['time'] }}</span></th>
+          <tr class="{{ $train['tooLateToLeave'] ? 'red-bg' : '' }}">
+            <th scope="row">{{ $train['time'] }}</th>
             <td>{{ $train['platform'] }}</td>
             <td>
                 <span class="{{ $train['delayed'] ? 'red-text' : 'green-text' }}">{{ $train['status'] }}</span>

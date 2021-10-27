@@ -11,7 +11,7 @@ class CreateAutomationsTable extends Migration
         Schema::create('automations', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->integer('value');
+            $table->integer('value')->nullable();
         });
     }
 }

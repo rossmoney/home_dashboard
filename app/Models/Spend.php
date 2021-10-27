@@ -42,6 +42,7 @@ class Spend extends Model
             $categorySpends[$category->name]['Total'] = This::byMonth($month)->where('category_id', $category->id)->get()->sum('cost');
             $categorySpends[$category->name]['Jack'] = This::byMonth($month)->where('category_id', $category->id)->where('users.name', 'Jack')->sum('cost');
             $categorySpends[$category->name]['Ross'] = This::byMonth($month)->where('category_id', $category->id)->where('users.name', 'Ross')->sum('cost');
+            $categorySpends[$category->name]['Recurrent'] = $category->recurrent;
         }
 
         return collect($categorySpends);

@@ -6,6 +6,17 @@
     color: red;
 }
 
+.red-bg td, .red-bg th {
+    background-color: red !important;
+    box-shadow: 0 !important;
+    --bs-table-accent-bg: 0 !important;
+    color: white !important;
+}
+
+.blue-text {
+    color: cyan !important;
+}
+
 html,body {
     background-color: #212529;
 }
