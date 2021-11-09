@@ -5,6 +5,8 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+use App\Console\Commands\TrainTimesCommand;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -25,7 +27,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command(\Spatie\TimeWeatherTile\Commands\FetchOpenWeatherMapDataCommand::class)->everyMinute();
 
-        $schedule->command('dashboard:fetch-train-times')->everyMinute();
+        $schedule->command(TrainTimesCommand::class)->everyMinute();
     }
 
     /**
