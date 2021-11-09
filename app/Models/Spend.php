@@ -39,9 +39,16 @@ class Spend extends Model
 
         foreach (SpendingCategory::orderBy('recurrent', 'DESC')->orderBy('name')->get() as $category)
         {
+            $totalJack = This::byMonth($month)->where('category_id', $category->id)->where('users.name', 'Jack')->sum('cost');
+            $totalRoss = This::byMonth($month)->where('category_id', $category->id)->where('users.name', 'Ross')->sum('cost');
+
+            if ($totalJack + $totalRoss == 0) {
+                continue;
+            }
+
             $categorySpends[$category->name]['Total'] = This::byMonth($month)->where('category_id', $category->id)->get()->sum('cost');
-            $categorySpends[$category->name]['Jack'] = This::byMonth($month)->where('category_id', $category->id)->where('users.name', 'Jack')->sum('cost');
-            $categorySpends[$category->name]['Ross'] = This::byMonth($month)->where('category_id', $category->id)->where('users.name', 'Ross')->sum('cost');
+            $categorySpends[$category->name]['Jack'] = $totalJack;
+            $categorySpends[$category->name]['Ross'] = $totalRoss;
             $categorySpends[$category->name]['Recurrent'] = $category->recurrent;
         }
 
