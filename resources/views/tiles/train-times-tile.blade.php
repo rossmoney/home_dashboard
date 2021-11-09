@@ -20,7 +20,7 @@
             <th scope="row">{{ $train['time'] }}</th>
             <td>{{ $train['platform'] }}</td>
             <td>
-                <span class="{{ $train['delayed'] ? 'red-text' : 'green-text' }}">{{ $train['status'] }}</span>
+                {{ $train['delayed'] ? 'Delayed Till ' : '' }}{{ $train['status'] }}
                 {!! $train['delayed'] ? '<br><span>'. $train['delayReason'] . '</span>' : '' !!}
             </td>
             <td>{{ $train['operator'] }}</td>

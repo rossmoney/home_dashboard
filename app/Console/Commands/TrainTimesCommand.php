@@ -62,6 +62,7 @@ class TrainTimesCommand extends Command
             $destinationStation = $configuration['destination_station'];
             $resultCount = $configuration['result_count'] ?? 20;
 
+            //https://huxley.apphb.com/departures/Hednesford/to/Birmingham New Street/20?accessToken=
             $response = Http::get("https://huxley.apphb.com/{$requestData}/{$originStation}/to/{$destinationStation}/{$resultCount}?accessToken={$this->nationalRailToken}");
 
             if (! $response->ok()) {
@@ -77,7 +78,19 @@ class TrainTimesCommand extends Command
                         return [];
                     }
 
-                    $time = Carbon::parse(date('Y-m-d') . ' ' . ($requestData == 'departures') ? $service['std'] : (($requestData == 'arrivals') ? $service['sta'] : ''));
+                    $delayed = (!empty($service['etd']) && $service['etd'] != 'On time') ? true : false;
+
+                    if ($delayed) {
+                        $timeKey = ($requestData == 'departures') ? 'etd' : 'eta';
+                    }
+
+                    if (!$delayed) {
+                        $timeKey = ($requestData == 'departures') ? 'std' : 'sta';
+                    }
+
+                    $serviceTime = $service[$timeKey];
+
+                    $time = Carbon::parse(date('Y-m-d') . ' ' . $serviceTime);
                     $now = Carbon::now();
 
                     return [
@@ -88,7 +101,7 @@ class TrainTimesCommand extends Command
                         'operator' => $service['operator'],
                         'origin' => $service['origin'],
                         'destination' => $service['destination'],
-                        'delayed' => (!empty($service['etd']) && $service['etd'] == 'Delayed') ? true : false,
+                        'delayed' => $delayed,
                         'delayReason' => $service['delayReason']
                     ];
                 })
