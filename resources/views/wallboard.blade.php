@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+{{--@extends('layouts.dashboard')
 
 @section('content')
 <div class="sliderAx h-auto">
@@ -10,4 +10,6 @@
     </div>
     @endfor
 </div>
-@endsection
+@endsection--}}
+
+@include('dashboards.1')

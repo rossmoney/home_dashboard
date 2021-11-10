@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command(\Spatie\TimeWeatherTile\Commands\FetchOpenWeatherMapDataCommand::class)->everyMinute();
 
-        $schedule->command(TrainTimesCommand::class)->everyMinute();
+        //$schedule->command(TrainTimesCommand::class)->everyMinute();
     }
 
     /**

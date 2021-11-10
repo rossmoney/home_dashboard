@@ -32,6 +32,8 @@
             </div>
         </div>
 
+        @livewireScripts
+
         <script src="https://kit.fontawesome.com/25563b37c3.js" crossorigin="anonymous"></script>
 
         @stack('scripts')

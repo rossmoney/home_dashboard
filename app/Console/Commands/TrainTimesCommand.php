@@ -107,6 +107,8 @@ class TrainTimesCommand extends Command
                 })
                 //->take(12)
                 ->toArray();
+
+            dump($trains);
     
             $this->tile->putData($configurationName, $trains);
         }
