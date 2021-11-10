@@ -59,14 +59,19 @@
             </div>
 
             <script type="text/javascript">
-             $('#installment').click(function() {
-               if ($('#end_date').attr('disabled') == 'disabled')
-               {
-                $('#end_date').removeAttr('disabled');
-               } else {
-                $('#end_date').attr('disabled', "disabled");
-               }
-             });
+              function installmentClick()
+              {
+                if ($('#end_date').attr('disabled') == 'disabled')
+                {
+                  $('#end_date').removeAttr('disabled');
+                } else {
+                  $('#end_date').attr('disabled', "disabled");
+                }
+              }
+              
+              $('#installment').click(installmentClick);
+            
+              $(document).ready(installmentClick);
             </script>
 
             <div class="clearfix"></div>
