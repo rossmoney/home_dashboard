@@ -45,7 +45,7 @@ return [
                 'time_period' => '1d',
                 'title' => 'CryptoWatch Kraken BTC-GBP 1 Day'
             ],
-            'refresh_interval_in_seconds' => 60,
+            'refresh_interval_in_seconds' => 0,
         ],
         "train_times" => [
             'hnf_to_bhm' => [ 
@@ -60,7 +60,7 @@ return [
                 'data' => 'departures',
                 'title' => 'Train Departures Hednesford > London Euston'
             ],
-            'refresh_interval_in_seconds' => 60,
+            'refresh_interval_in_seconds' => 30,
         ],
         "spending" => [
             'default' => [
