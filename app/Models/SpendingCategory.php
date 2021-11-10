@@ -15,7 +15,7 @@ class SpendingCategory extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'name', 'recurrent', 'show_all'
     ];
 
     public $timestamps = false;

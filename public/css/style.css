@@ -16,6 +16,11 @@
     color: cyan !important;
 }
 
+.darkblue-text {
+    color: blue !important;
+}
+
+
 html,body {
     background-color: #212529;
 }

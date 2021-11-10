@@ -6,17 +6,19 @@
         <th scope="col">Category</th>
         <th scope="col">Who?</th>
         <th scope="col">When?</th>
+        <th scope="col">Recurring?</th>
         <th scope="col" width="30"></th>
       </tr>
     </thead>
     <tbody>
     @foreach($spending as $line)
-      <tr>
+      <tr class="{{ $line->installment ? 'darkblue-text' :'' }}">
         <th scope="row"><span class="{{ $line->cost < 0 ? 'red-text' : '' }}">{{ $line->cost < 0 ? '-' : '' }}&pound;{{ abs($line->cost) }}</span></th>
         <td>{{ $line->desc }}</td>
         <td>{{ $line->category }}</td>
         <td>{{ $line->user }}</td>
-        <td>{{ date("d/m", strtotime($line->date)) }}</td>
+        <td>{{ $line->when }}</td>
+        <td>{{ $line->installment ? '✓' : '✗' }}</td>
         <td>
             <form method="post" action="{{ url('spending/' . $line->id) }}">
                 @csrf

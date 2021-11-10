@@ -15,7 +15,7 @@ class SpendingController extends Controller
     public function index()
     {
         $spending = Spend::byMonth(date('m'))->get();
-        $spendingCategories = SpendingCategory::orderBy('name')->get();
+        $spendingCategories = SpendingCategory::orderBy('name')->whereNotIn('id', [12, 14])->get(); //not bills or windows
         $users = User::orderBy('name')->get();
 
         $totalRoss = Spend::byMonth(date('m'))->where('users.name', 'Ross')->sum('cost');
@@ -37,18 +37,19 @@ class SpendingController extends Controller
             'cost' => 'required|gt:0',
             'date' => 'required',
             'category_id' => 'required',
-            'user_id' => 'required'
+            'user_id' => 'required',
+            'end_date' => 'required_with:recurring'
         ]);
 
         $spending = Spend::create(request()->except('_token', '_method'));
 
-        return redirect()->back()->with(['success' => 'Saved Spend']);
+        return redirect()->back()->withSuccess('Saved spend.');
     }
     
     public function destroy(Spend $spending)
     {
         $spending->delete();
 
-        return redirect()->back()->with(['success' => 'Spend deleted.']);
+        return redirect()->back()->withSuccess('Spend deleted.');
     }
 }

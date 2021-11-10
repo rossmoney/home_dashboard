@@ -11,7 +11,8 @@ class CreateSpendingCategoriesTable extends Migration
         Schema::create('spending_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('recurrent');
+            $table->tinyInteger('recurrent')->default(0);
+            $table->tinyInteger('show_all')->default(0);
         });
     }
 }

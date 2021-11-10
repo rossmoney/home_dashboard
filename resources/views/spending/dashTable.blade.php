@@ -20,8 +20,8 @@ $spendingChunks = $spending->chunk($spending->count() / 2);
     @foreach($categorySpending as $category => $breakdown)
       <tr class="{{ $breakdown['Recurrent'] ? 'blue-text' : '' }}">
         <th scope="row">{{ $category }}</th>
-        <td>&pound;{{ $breakdown['Jack'] }}</td>
-        <td>&pound;{{ $breakdown['Ross'] }}</td>
+        <td>{!! $breakdown['Jack'] !!}</td>
+        <td>{!! $breakdown['Ross'] !!}</td>
         <td><span class="{{ $breakdown['Total'] < 0 ? 'red-text' : '' }}">{{ $breakdown['Total'] < 0 ? '-' : '' }}&pound;{{ abs($breakdown['Total']) }}</span></td>
       </tr>
     @endforeach

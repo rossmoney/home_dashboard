@@ -17,7 +17,7 @@
                     <span> {{ $insideTemperature }}°{{ $unit == 'metric' ? 'C': 'F'}}  <span class="text-3xl uppercase text-dimmed">in</span></span>
                 @endisset
             </div>
-            <div class="text-4xl">{{ $city }}, {{ $countryCode }}</div>
+            {{--<div class="text-4xl">{{ $city }}, {{ $countryCode }}</div>--}}
         </div>
 
     </div>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\SpendingController;
+use App\Http\Controllers\SpendingCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +40,6 @@ for ($i = 1; $i <= $dashboards; $i++) {
 Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('spending', SpendingController::class);
-
+    Route::resource('spending_category', SpendingCategoryController::class);
+    
 });

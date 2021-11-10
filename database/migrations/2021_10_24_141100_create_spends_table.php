@@ -15,6 +15,8 @@ class CreateSpendsTable extends Migration
             $table->integer('category_id');
             $table->integer('user_id');
             $table->decimal('cost', 8, 2);
+            $table->tinyInteger('installment')->default(0);
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }
