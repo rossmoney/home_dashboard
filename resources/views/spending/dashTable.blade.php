@@ -29,10 +29,10 @@ $spendingChunks = $spending->chunk($spending->count() / 2);
           <td colspan="4"></td>
       </tr>
       <tr>
-        <th scope="row">Totals: </th>
-        <td><span class="text-xl">&pound;{{ $totals['jack'] }}</span></td>
-        <td><span class="text-xl">&pound;{{ $totals['ross'] }}</span></td>
-        <td><span class="text-xl">&pound;{{ $totals['totalToRoss'] }}</span></td>
+        <th scope="row text-4xl">Totals: </th>
+        <td><span class="text-4xl">&pound;{{ $totals['jack'] }}</span></td>
+        <td><span class="text-4xl">&pound;{{ $totals['ross'] }}</span></td>
+        <td><span class="text-4xl">&pound;{{ $totals['totalToRoss'] }}</span></td>
       </tr>
     </tbody>
 </table>

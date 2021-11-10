@@ -1,11 +1,12 @@
 <x-dashboard>
-    <livewire:time-weather-tile position="a1:b2" />
+    <livewire:time-weather-tile position="a1:b3" />
 
-    <livewire:train-times-tile position="a3:b5" configuration="hnf_to_bhm" />
 
-    <livewire:train-times-tile position="a6:b8" configuration="hnf_to_eus" />
+    <livewire:cryptowatch-tile position="a4:d8" configuration="btcgbp_4h" />
 
-    <livewire:cryptowatch-tile position="c1:d4" configuration="btcgbp_4h" />
+    {{--<livewire:train-times-tile position="a6:b8" configuration="hnf_to_eus" />--}}
 
-    <livewire:spending-tile position="c5:d8" />
+    <livewire:train-times-tile position="c1:d3" configuration="hnf_to_bhm" />
+
+    <livewire:spending-tile position="c4:d8" />
 </x-dashboard>

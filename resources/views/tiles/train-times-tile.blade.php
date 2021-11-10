@@ -1,10 +1,10 @@
 <x-dashboard-tile :position="$position" refresh-interval="{{ $refreshInterval }}">
     @if(!empty($title))
-        <h6 class="mb-2 font-bold">{{ $title }}</h6>
+        <h6 class="mb-2 font-bold text-3xl">{!! $title !!}</h6>
     @endif
 
     @if(!empty($trains))
-    <table class="table table-sm table-striped table-dark border-2">
+    <table class="table table-sm table-striped table-dark border-2 text-xl">
         <thead>
           <tr>
             <th scope="col">Time</th>
@@ -20,7 +20,7 @@
             <th scope="row">{{ $train['time'] }}</th>
             <td>{{ $train['platform'] }}</td>
             <td>
-                {{ $train['delayed'] ? 'Delayed Till ' : '' }}{{ $train['status'] }}
+                {{ $train['delayed'] ? 'Dl: ' : '' }}{{ $train['status'] }}
                 {!! $train['delayed'] ? '<br><span>'. $train['delayReason'] . '</span>' : '' !!}
             </td>
             <td>{{ $train['operator'] }}</td>

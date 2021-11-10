@@ -52,7 +52,7 @@ return [
                 'origin_station' => 'Hednesford',
                 'destination_station' => 'Birmingham New Street',
                 'data' => 'departures',
-                'title' => 'Train Departures Hednesford > Birmingham NS'
+                'title' => 'Train Departures<br>Hednesford > Birmingham NS'
             ],
             'hnf_to_eus' => [ 
                 'origin_station' => 'Hednesford',
