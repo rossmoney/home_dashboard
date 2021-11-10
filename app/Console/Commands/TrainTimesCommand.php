@@ -98,7 +98,7 @@ class TrainTimesCommand extends Command
                         'tooLateToLeave' => $time->subMinutes(25)->lt($now),
                         'status' => $service['etd'],
                         'platform' => $service['platform'],
-                        'operator' => $service['operator'],
+                        'operator' => $service['operator'] == 'West Midlands Trains' ? 'WMT' : $service['operator'],
                         'origin' => $service['origin'],
                         'destination' => $service['destination'],
                         'delayed' => $delayed,
