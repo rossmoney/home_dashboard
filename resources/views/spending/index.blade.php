@@ -61,7 +61,7 @@
             <script type="text/javascript">
               function installmentClick()
               {
-                if ($('#end_date').attr('disabled') == 'disabled')
+                if ($('#installment').prop('checked'))
                 {
                   $('#end_date').removeAttr('disabled');
                 } else {
