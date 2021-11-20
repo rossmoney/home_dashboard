@@ -38,7 +38,7 @@ class SpendingController extends Controller
             'date' => 'required',
             'category_id' => 'required',
             'user_id' => 'required',
-            'end_date' => 'required_with:installment'
+            'end_date' => 'sometimes|required_with:installment'
         ]);
 
         $spending = Spend::create(request()->except('_token', '_method'));

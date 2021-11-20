@@ -18,6 +18,11 @@
                 @endisset
             </div>
             {{--<div class="text-4xl">{{ $city }}, {{ $countryCode }}</div>--}}
+            <div class="text-4xl mt-12">
+                <div class="mt-12">
+                {{ request()->ip() }}
+                </div>
+            </div>
         </div>
 
     </div>
