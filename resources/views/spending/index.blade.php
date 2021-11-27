@@ -49,7 +49,7 @@
 
             <div class="mb-3">
               <label>Date</label>
-              <input class="form-control" type="date" name="date" value="{{ old('date', date('Y-m-d')) }}" />
+              <input class="form-control" type="date" name="date" value="{{ old('date', date('Y-m-d', strtotime($currentDate))) }}" />
             </div>
 
             <div class="mb-3 float-left">
@@ -78,7 +78,7 @@
             
             <div class="mb-3">
               <label>Installment End Date</label>
-              <input disabled="disabled" id="end_date" class="form-control" type="date" name="end_date" value="{{ old('end_date', date('Y-m-d', strtotime("+3 months", strtotime(date("y-m-d"))) )) }}" />
+              <input disabled="disabled" id="end_date" class="form-control" type="date" name="end_date" value="{{ old('end_date', date('Y-m-d', strtotime("+2 months", strtotime(date("y") . '-' . $currentMonth . '-01')) )) }}" />
             </div>
 
             <div class="mb-3">

@@ -27,8 +27,8 @@ class Spend extends Model
 
     public static function byMonth(int $month)
     {
-        $startMonth = Carbon::now()->startOfMonth();
-        $endMonth = Carbon::now()->endOfMonth();
+        $startMonth = Carbon::parse(date('Y') .'-'. $month .'-01')->startOfMonth();
+        $endMonth = Carbon::parse(date('Y') .'-'. $month .'-01')->endOfMonth();
 
         return This::select('spends.id', 'spends.installment', DB::raw('IF(spends.user_id = 2, (spends.cost * -1), spends.cost) AS cost'), 'date', 'desc', 'users.name as user', 'spending_categories.name as category')
             ->where(function ($query) use ($startMonth, $endMonth) {
@@ -87,7 +87,7 @@ class Spend extends Model
     public function getWhenAttribute()
     {
         $day = date("d", strtotime($this->date));
-        return $day . '/' . date('m');
+        return $day . '/' . config('app.current_month');
     }
 
     public function getWhenDayAttribute()
@@ -98,6 +98,6 @@ class Spend extends Model
     public function getWhenDateAttribute()
     {
         $day = date("d", strtotime($this->date));
-        return date('Y') . '-'. date('m') . '-' . $day;
+        return date('Y') . '-'. config('app.current_month') . '-' . $day;
     }
 }

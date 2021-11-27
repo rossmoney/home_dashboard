@@ -16,9 +16,12 @@
         </thead>
         <tbody>
           @foreach($trains as $train)
-          <tr class="{{ array_key_exists('tooLateToLeave', $train) && $train['tooLateToLeave'] ? 'red-bg' : '' }}">
-            <th scope="row"><span class="text-4xl">{{ array_key_exists('time', $train) ? $train['time'] : '' }}</span></th>
-            <td><span class="text-4xl">{{ array_key_exists('platform', $train) ? $train['platform'] : '' }}</span></td>
+            @if (!array_key_exists('status', $train))
+              @continue
+            @endif
+          <tr class="{{ $train['tooLateToLeave'] ? 'red-bg' : '' }}">
+            <th scope="row"><span class="text-4xl">{{ $train['time'] }}</span></th>
+            <td><span class="text-4xl">{{ $train['platform'] }}</span></td>
             <td><span class="text-3xl">
                 {{ $train['delayed'] ? 'Dl: ' : '' }}{{ $train['status'] }}</span>
             </td>

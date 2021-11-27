@@ -14,12 +14,20 @@ class SpendingController extends Controller
 {
     public function index()
     {
-        $spending = Spend::byMonth(date('m'))->get();
+        $currentMonth = config('app.current_month');
+
+        $currentDate = date('Y') . '-' . $currentMonth . '-01';
+        if (strtotime($currentDate) < strtotime('now'))
+        {
+            $currentDate = date('Y-m-d');
+        }
+
+        $spending = Spend::byMonth($currentMonth)->get();
         $spendingCategories = SpendingCategory::orderBy('name')->whereNotIn('id', [12, 14])->get(); //not bills or windows
         $users = User::orderBy('name')->get();
 
-        $totalRoss = Spend::byMonth(date('m'))->where('users.name', 'Ross')->sum('cost');
-        $totalJack = Spend::byMonth(date('m'))->where('users.name', 'Jack')->sum('cost');
+        $totalRoss = Spend::byMonth($currentMonth)->where('users.name', 'Ross')->sum('cost');
+        $totalJack = Spend::byMonth($currentMonth)->where('users.name', 'Jack')->sum('cost');
 
         $totals = collect([
             'jack' => $totalJack,
@@ -27,7 +35,7 @@ class SpendingController extends Controller
             'totalToRoss' => $totalRoss - $totalJack
         ]);
 
-        return view('spending.index', compact('spending', 'spendingCategories', 'users', 'totals'));
+        return view('spending.index', compact('spending', 'spendingCategories', 'users', 'totals', 'currentMonth', 'currentDate'));
     }
 
     public function create()
