@@ -31,10 +31,12 @@ class SpendingTile extends Component
         $configuration = $this->configuration;
         $title = $this->title;
 
-        $categorySpending = Spend::byCategory(date('m'));
+        $currentMonth = config('app.current_month');
+
+        $categorySpending = Spend::byCategory($currentMonth);
         
-        $totalRoss = Spend::byMonth(date('m'))->where('users.name', 'Ross')->sum('cost');
-        $totalJack = Spend::byMonth(date('m'))->where('users.name', 'Jack')->sum('cost');
+        $totalRoss = Spend::byMonth($currentMonth)->where('users.name', 'Ross')->sum('cost');
+        $totalJack = Spend::byMonth($currentMonth)->where('users.name', 'Jack')->sum('cost');
 
         $totals = collect([
             'jack' => $totalJack,
