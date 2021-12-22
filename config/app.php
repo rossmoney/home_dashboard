@@ -16,6 +16,7 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     'current_month' => env('CURRENT_MONTH') ?? date('m'),
+    'current_year' => env('CURRENT_YEAR') ?? date('Y'),
 
     /*
     |--------------------------------------------------------------------------

@@ -15,8 +15,9 @@ class SpendingController extends Controller
     public function index()
     {
         $currentMonth = config('app.current_month');
+        $currentYear = config('app.current_year');
 
-        $currentDate = date('Y') . '-' . $currentMonth . '-01';
+        $currentDate = $currentYear . '-' . $currentMonth . '-01';
         if (strtotime($currentDate) < strtotime('now'))
         {
             $currentDate = date('Y-m-d');

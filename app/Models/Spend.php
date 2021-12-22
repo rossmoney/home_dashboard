@@ -27,13 +27,16 @@ class Spend extends Model
 
     public static function byMonth(int $month)
     {
-        $startMonth = Carbon::parse(date('Y') .'-'. $month .'-01')->startOfMonth();
-        $endMonth = Carbon::parse(date('Y') .'-'. $month .'-01')->endOfMonth();
+        $currentYear = config('app.current_year');
 
-        return This::select('spends.id', 'spends.installment', DB::raw('IF(spends.user_id = 2, (spends.cost * -1), spends.cost) AS cost'), 'date', 'desc', 'users.name as user', 'spending_categories.name as category')
+        $startMonth = Carbon::parse($currentYear .'-'. $month .'-01')->startOfMonth();
+        $endMonth = Carbon::parse($currentYear .'-'. $month .'-01')->endOfMonth();
+
+        return This::select('spends.id', 'spends.end_date', 'spends.installment', DB::raw('IF(spends.user_id = 2, (spends.cost * -1), spends.cost) AS cost'), 'date', 'desc', 'users.name as user', 'spending_categories.name as category')
             ->where(function ($query) use ($startMonth, $endMonth) {
                 $query->whereBetween('date', [$startMonth, $endMonth])
-                      ->orWhere('end_date', '>=', $endMonth);
+                      ->orWhere('end_date', '>=', $endMonth) //permanent installment like bills
+                      ->orWhereBetween('end_date', [$startMonth, $endMonth]); //short term installments
             })
             ->leftJoin('users', 'users.id', '=', 'spends.user_id')
             ->leftJoin('spending_categories', 'spending_categories.id', '=', 'spends.category_id')
@@ -98,6 +101,6 @@ class Spend extends Model
     public function getWhenDateAttribute()
     {
         $day = date("d", strtotime($this->date));
-        return date('Y') . '-'. config('app.current_month') . '-' . $day;
+        return config('app.current_year') .'-'. config('app.current_month') . '-' . $day;
     }
 }

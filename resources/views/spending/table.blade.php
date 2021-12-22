@@ -7,6 +7,7 @@
         <th scope="col">Who?</th>
         <th scope="col">When?</th>
         <th scope="col">Recurring?</th>
+        <th scope="col">Installment Ends</th>
         <th scope="col" width="30"></th>
       </tr>
     </thead>
@@ -19,6 +20,7 @@
         <td>{{ $line->user }}</td>
         <td>{{ $line->when }}</td>
         <td>{{ $line->installment ? '✓' : '✗' }}</td>
+        <td>{{ date('d/m/Y', strtotime($line->end_date)) }}</td>
         <td>
             <form method="post" action="{{ url('spending/' . $line->id) }}">
                 @csrf
