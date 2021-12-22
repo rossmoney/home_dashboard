@@ -23,6 +23,8 @@ class SpendingController extends Controller
             $currentDate = date('Y-m-d');
         }
 
+        $minInstallmentEndDate = date('Y-m-d', strtotime("+2 months", strtotime( $currentDate) ));
+
         $spending = Spend::byMonth($currentMonth)->get();
         $spendingCategories = SpendingCategory::orderBy('name')->whereNotIn('id', [12, 14])->get(); //not bills or windows
         $users = User::orderBy('name')->get();
@@ -36,7 +38,7 @@ class SpendingController extends Controller
             'totalToRoss' => $totalRoss - $totalJack
         ]);
 
-        return view('spending.index', compact('spending', 'spendingCategories', 'users', 'totals', 'currentMonth', 'currentDate'));
+        return view('spending.index', compact('spending', 'spendingCategories', 'users', 'totals', 'currentMonth', 'currentDate', 'minInstallmentEndDate'));
     }
 
     public function create()
