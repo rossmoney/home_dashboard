@@ -20,7 +20,7 @@
         <td>{{ $line->user }}</td>
         <td>{{ $line->when }}</td>
         <td>{{ $line->installment ? '✓' : '✗' }}</td>
-        <td>{{ date('d/m/Y', strtotime($line->end_date)) }}</td>
+        <td>{{ !empty($line->end_date) ? date('d/m/Y', strtotime($line->end_date)) : '' }}</td>
         <td>
             <form method="post" action="{{ url('spending/' . $line->id) }}">
                 @csrf
