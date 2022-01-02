@@ -8,8 +8,8 @@
 
     <script type="text/javascript">
     var chart = new cryptowatch.Embed('{{ $exchange }}', '{{ $currencyPair }}', {
-        timePeriod: '{{ $timePeriod ?? '1d' }}',
-        //width: 650,
+        timePeriod: '{{ $timePeriod ?? '3d' }}',
+        width: 650,
         height: 500,
         presetColorScheme: 'delek'
     });

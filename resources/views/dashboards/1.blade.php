@@ -2,7 +2,7 @@
     <livewire:time-weather-tile position="a1:b3" />
 
 
-    <livewire:cryptowatch-tile position="a4:d8" configuration="btcgbp_4h" />
+    <livewire:cryptowatch-tile position="a4:d8" configuration="btcgbp" />
 
     {{--<livewire:train-times-tile position="a6:b8" configuration="hnf_to_eus" />--}}
 
