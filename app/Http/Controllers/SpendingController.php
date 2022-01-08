@@ -17,7 +17,7 @@ class SpendingController extends Controller
         $currentMonth = config('app.current_month');
         $currentYear = config('app.current_year');
 
-        $currentDate = $currentYear . '-' . $currentMonth . '-01';
+        $monthStart = $currentDate = $currentYear . '-' . $currentMonth . '-01';
         if (strtotime($currentDate) < strtotime('now'))
         {
             $currentDate = date('Y-m-d');
@@ -38,7 +38,7 @@ class SpendingController extends Controller
             'totalToRoss' => $totalRoss - $totalJack
         ]);
 
-        return view('spending.index', compact('spending', 'spendingCategories', 'users', 'totals', 'currentMonth', 'currentDate', 'minInstallmentEndDate'));
+        return view('spending.index', compact('spending', 'spendingCategories', 'users', 'totals', 'currentMonth', 'currentDate', 'monthStart', 'minInstallmentEndDate'));
     }
 
     public function create()

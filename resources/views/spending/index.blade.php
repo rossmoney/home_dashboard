@@ -49,7 +49,7 @@
 
             <div class="mb-3">
               <label>Date</label>
-              <input class="form-control" type="date" name="date" min="{{ date('Y-m-d', strtotime($currentDate)) }}" value="{{ old('date', date('Y-m-d', strtotime($currentDate))) }}" />
+              <input class="form-control" type="date" name="date" min="{{ date('Y-m-d', strtotime($monthStart)) }}" value="{{ old('date', date('Y-m-d', strtotime($currentDate))) }}" />
             </div>
 
             <div class="mb-3 float-left">
