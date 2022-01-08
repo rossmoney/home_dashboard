@@ -26,7 +26,7 @@ class SpendingController extends Controller
         $minInstallmentEndDate = date('Y-m-d', strtotime("+2 months", strtotime( $currentDate) ));
 
         $spending = Spend::byMonth($currentMonth)->get();
-        $spendingCategories = SpendingCategory::orderBy('name')->whereNotIn('id', [12, 14])->get(); //not bills or windows
+        $spendingCategories = SpendingCategory::orderBy('name')->whereNotIn('id', [14])->get(); //not bills or windows
         $users = User::orderBy('name')->get();
 
         $totalRoss = Spend::byMonth($currentMonth)->where('users.name', 'Ross')->sum('cost');

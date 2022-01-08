@@ -34,9 +34,11 @@ class Spend extends Model
 
         return This::select('spends.id', 'spends.end_date', 'spends.installment', DB::raw('IF(spends.user_id = 2, (spends.cost * -1), spends.cost) AS cost'), 'date', 'desc', 'users.name as user', 'spending_categories.name as category')
             ->where(function ($query) use ($startMonth, $endMonth) {
-                $query->whereBetween('date', [$startMonth, $endMonth])
-                      ->orWhere('end_date', '>=', $endMonth) //permanent installment like bills
-                      ->orWhereBetween('end_date', [$startMonth, $endMonth]); //short term installments
+                $query->where(function ($query) use ($startMonth, $endMonth) {
+                $query->where('date', '<=', $endMonth)
+                      ->where('end_date', '>=', $startMonth); //permanent installment like bills
+                }) 
+                ->orWhereBetween('date', [$startMonth, $endMonth]); //short term installments
             })
             ->leftJoin('users', 'users.id', '=', 'spends.user_id')
             ->leftJoin('spending_categories', 'spending_categories.id', '=', 'spends.category_id')
