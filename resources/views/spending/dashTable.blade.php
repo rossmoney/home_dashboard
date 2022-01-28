@@ -1,12 +1,3 @@
-{{--@php
-$spendingChunks = $spending->chunk($spending->count() / 2);
-@endphp
-
-<div class="grid grid-cols-2">
-    @include('spending.table', ['spending' => $spendingChunks[0], 'dash' => true])
-    @include('spending.table', ['spending' => $spendingChunks[1], 'dash' => true])
-</div>--}}
-
 <table class="table table-sm table-striped table-dark border-2">
     <thead>
       <tr>

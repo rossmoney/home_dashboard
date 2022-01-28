@@ -33,16 +33,7 @@ class SpendingTile extends Component
 
         $currentMonth = config('app.current_month');
 
-        $categorySpending = Spend::byCategory($currentMonth);
-        
-        $totalRoss = Spend::byMonth($currentMonth)->where('users.name', 'Ross')->sum('cost');
-        $totalJack = Spend::byMonth($currentMonth)->where('users.name', 'Jack')->sum('cost');
-
-        $totals = collect([
-            'jack' => $totalJack,
-            'ross' => $totalRoss,
-            'totalToRoss' => $totalRoss - $totalJack
-        ]);
+        list($categorySpending, $totals) = Spend::byCategory($currentMonth);
 
         return view('tiles.spending-tile', compact('title', 'refreshInterval', 'configuration', 'categorySpending', 'totals'));
     }

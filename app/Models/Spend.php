@@ -25,18 +25,29 @@ class Spend extends Model
         'desc', 'date', 'cost', 'category_id', 'user_id', 'installment', 'end_date'
     ];
 
-    public static function byMonth(int $month)
+    public static function byMonth(int $month, bool $wholeMonth = true)
     {
         $currentYear = config('app.current_year');
 
         $startMonth = Carbon::parse($currentYear .'-'. $month .'-01')->startOfMonth();
         $endMonth = Carbon::parse($currentYear .'-'. $month .'-01')->endOfMonth();
+        
+        $endDay = $endMonth->format('d');
+        if (!$wholeMonth) { 
+            if (date("m") < $month) {
+                $endDay = '01'; //month hasn't started ye
+            }
+            $endDay = date("d");
+            $endMonth = Carbon::parse($currentYear. "-".$month."-". $endDay);
+        }
 
         return This::select('spends.id', 'spends.end_date', 'spends.installment', DB::raw('IF(spends.user_id = 2, (spends.cost * -1), spends.cost) AS cost'), 'date', 'desc', 'users.name as user', 'spending_categories.name as category')
-            ->where(function ($query) use ($startMonth, $endMonth) {
-                $query->where(function ($query) use ($startMonth, $endMonth) {
+            ->where(function ($query) use ($startMonth, $endMonth, $endDay) {
+                $query->where(function ($query) use ($startMonth, $endMonth, $endDay) {
                 $query->where('date', '<=', $endMonth)
-                      ->where('end_date', '>=', $startMonth); //permanent installment like bills
+                      //->where('date', '>=', $startMonth)
+                      ->where('end_date','>=', $startMonth) //permanent installment like bills
+                      ->whereDay('date', '<=', $endDay);
                 }) 
                 ->orWhereBetween('date', [$startMonth, $endMonth]); //short term installments
             })
@@ -48,19 +59,22 @@ class Spend extends Model
     public static function byCategory(int $month)
     {
         $categorySpends = [];
+        $totals = ['jack' => 0, 'ross' => 0,'totalToRoss' => 0];
 
         foreach (SpendingCategory::orderBy('recurrent', 'DESC')->orderBy('name')->get() as $category)
         {
             //$spendsJack = This::byMonth($month)->where('category_id', $category->id)->where('users.name', 'Jack');
-            $spendsRoss = This::byMonth($month)->where('category_id', $category->id)->where('users.name', 'Ross');
-            $totalJack = This::byMonth($month)->where('category_id', $category->id)->where('users.name', 'Jack')->sum('cost');
-            $totalRoss = This::byMonth($month)->where('category_id', $category->id)->where('users.name', 'Ross')->sum('cost');
-
+            $spendsRoss = This::byMonth($month, false)->where('category_id', $category->id)->where('users.name', 'Ross');
+            $totalJack = This::byMonth($month, false)->where('category_id', $category->id)->where('users.name', 'Jack')->sum('cost');
+            $totalRoss = This::byMonth($month, false)->where('category_id', $category->id)->where('users.name', 'Ross')->sum('cost');
             if ($totalJack + $totalRoss == 0) {
                 continue;
             }
+            $totals['jack'] += $totalJack;
+            $totals['ross'] += $totalRoss;
+            $totals['totalToRoss'] += ($totalRoss + $totalJack);
 
-            $categorySpends[$category->name]['Total'] = This::byMonth($month)->where('category_id', $category->id)->get()->sum('cost');
+            $categorySpends[$category->name]['Total'] = ($totalRoss + $totalJack > 0) ? $totalRoss+$totalJack : 0;
 
             $categorySpends[$category->name]['Jack'] = ($totalJack > 0) ? '&pound;' . $totalJack : '-';
             $categorySpends[$category->name]['Ross'] = ($totalRoss > 0) ? '&pound;' . $totalRoss : '-';
@@ -86,7 +100,7 @@ class Spend extends Model
             $categorySpends[$category->name]['Recurrent'] = $category->recurrent;
         }
 
-        return collect($categorySpends);
+        return [$categorySpends, $totals];
     }
 
     public function getWhenAttribute()
