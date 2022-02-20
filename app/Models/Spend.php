@@ -63,10 +63,10 @@ class Spend extends Model
 
         foreach (SpendingCategory::orderBy('recurrent', 'DESC')->orderBy('name')->get() as $category)
         {
-            //$spendsJack = This::byMonth($month)->where('category_id', $category->id)->where('users.name', 'Jack');
-            $spendsRoss = This::byMonth($month, false)->where('category_id', $category->id)->where('users.name', 'Ross');
-            $totalJack = This::byMonth($month, false)->where('category_id', $category->id)->where('users.name', 'Jack')->sum('cost');
-            $totalRoss = This::byMonth($month, false)->where('category_id', $category->id)->where('users.name', 'Ross')->sum('cost');
+            $spendsJack = This::byMonth($month, true)->where('category_id', $category->id)->where('users.name', 'Jack');
+            $spendsRoss = This::byMonth($month, true)->where('category_id', $category->id)->where('users.name', 'Ross');
+            $totalJack = -(This::byMonth($month, true)->where('category_id', $category->id)->where('users.name', 'Jack')->sum('cost'));
+            $totalRoss = This::byMonth($month, true)->where('category_id', $category->id)->where('users.name', 'Ross')->sum('cost');
             if ($totalJack + $totalRoss == 0) {
                 continue;
             }
@@ -74,32 +74,38 @@ class Spend extends Model
             $totals['ross'] += $totalRoss;
             $totals['totalToRoss'] += ($totalRoss + $totalJack);
 
-            $categorySpends[$category->name]['Total'] = ($totalRoss + $totalJack > 0) ? $totalRoss+$totalJack : 0;
+            $categorySpends[$category->name]['Total'] = '&pound;' . ($totalRoss + $totalJack);
 
-            $categorySpends[$category->name]['Jack'] = ($totalJack > 0) ? '&pound;' . $totalJack : '-';
-            $categorySpends[$category->name]['Ross'] = ($totalRoss > 0) ? '&pound;' . $totalRoss : '-';
+            $categorySpends[$category->name]['Description'] = '<span class="orange-text">Jack:</span> <span class="red-text">-&pound;' . $totalJack . '</span>';
+            $categorySpends[$category->name]['Amount'] = 'Ross: &pound;' . $totalRoss;
 
             if ($category->show_all)
             {
-                $jack = $ross = '';
-
-                /*foreach ($spendsJack->get() as $spend)
-                {
-                }*/
-
+                $description = $amount = '';
+                
                 foreach ($spendsRoss->get()->sortBy('when_date') as $spend)
                 {
-                    $jack .= '<span style="float: left;">' . $spend->desc . '</span><span style="float: right;">' . $spend->when_day . '</span><br>';
-                    $ross .= '<span>&pound;' . $spend->cost . '</span><br>';
+                    $description .= '<span style="float: left;">' . $spend->desc . '</span><span style="float: right;">' . $spend->when_day . '</span><br>';
+                    $amount .= '<span>&pound;' . $spend->cost . '</span><br>';
+                }
+                
+                foreach ($spendsJack->get()->sortBy('when_date') as $spend)
+                {
+                    $description .= '<span class="orange-text" style="float: left;">' . $spend->desc . '</span><span class="orange-text" style="float: right;">' . $spend->when_day . '</span><br>';
+                    $amount .= '<span class="red-text">-&pound;' . abs($spend->cost) . '</span><br>';
                 }
 
-                $categorySpends[$category->name]['Jack'] = $jack;
-                $categorySpends[$category->name]['Ross'] = $ross;
+                $categorySpends[$category->name]['Description'] = $description;
+                $categorySpends[$category->name]['Amount'] = $amount;
             }
 
             $categorySpends[$category->name]['Recurrent'] = $category->recurrent;
         }
-
+        
+        $totals['ross'] = '&pound;' . $totals['ross'];
+        $totals['jack'] = '<span class="red-text">-&pound;' . abs($totals['jack']) . '</span>';
+        $totals['totalToRoss'] = '&pound;' . $totals['totalToRoss'];
+        
         return [$categorySpends, $totals];
     }
 
