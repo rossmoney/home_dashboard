@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SpendingController;
 use App\Http\Controllers\SpendingCategoryController;
 
+use App\Models\Spend;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,23 +20,27 @@ use App\Http\Controllers\SpendingCategoryController;
 
 Auth::routes();
 
-$files = collect(File::files(base_path() . '/resources/views/dashboards'));
+/*$files = collect(File::files(base_path() . '/resources/views/dashboards'));
 
 $files = $files->filter(function($file) {
     return preg_match("/^[0-9]+\.blade\.php$/", $file->getFilename());
 });
 
-$dashboards = $files->count();
+$dashboards = $files->count();*/
 
-Route::get('/', function () use ($dashboards) {
-    return view('wallboard', compact('dashboards'));
+$currentMonth = config('app.current_month');
+list($categorySpending, $totals) = Spend::byCategory($currentMonth);
+
+Route::get('/', function () use ($categorySpending, $totals) {
+    return view('overview', compact('categorySpending', 'totals'));
+    //return view('wallboard', compact('dashboards'));
 });
 
-for ($i = 1; $i <= $dashboards; $i++) {
+/*for ($i = 1; $i <= $dashboards; $i++) {
     Route::get('/' . $i, function () use ($i) {
         return view('dashboards.' . $i);
     });    
-}
+}*/
 
 Route::group(['middleware' => 'auth'], function () {
 
