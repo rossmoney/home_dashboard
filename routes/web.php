@@ -29,10 +29,10 @@ $files = $files->filter(function($file) {
 $dashboards = $files->count();*/
 
 $currentMonth = config('app.current_month');
-list($categorySpending, $totals) = Spend::byCategory($currentMonth);
+list($categorySpending, $categoryTotals) = Spend::byCategory($currentMonth);
 
-Route::get('/', function () use ($categorySpending, $totals) {
-    return view('overview', compact('categorySpending', 'totals'));
+Route::get('/', function () use ($categorySpending, $categoryTotals) {
+    return view('overview', compact('categorySpending', 'categoryTotals'));
     //return view('wallboard', compact('dashboards'));
 });
 

@@ -11,12 +11,13 @@ html,body {
     margin-top:0;
     margin-bottom:0;
     background-color: #212529;
+    color: white;
 }
 
 .table td {
-    font-size: 18px !important;
+    font-size: 2rem !important;
 }
 
 .table th {
-    font-size: 18px !important;
+    font-size: 2rem !important;
 }

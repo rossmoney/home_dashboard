@@ -38,7 +38,9 @@ class SpendingController extends Controller
             'totalToRoss' => $totalRoss - $totalJack
         ]);
 
-        return view('spending.index', compact('spending', 'spendingCategories', 'users', 'totals', 'currentMonth', 'currentDate', 'monthStart', 'minInstallmentEndDate'));
+        list($categorySpending, $categoryTotals) = Spend::byCategory($currentMonth);
+
+        return view('spending.index', compact('spending', 'spendingCategories', 'users', 'totals', 'currentMonth', 'currentDate', 'monthStart', 'minInstallmentEndDate', 'categorySpending', 'categoryTotals'));
     }
 
     public function create()

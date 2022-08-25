@@ -149,10 +149,17 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card mb-3">
         <h5 class="card-header">Current Month Spends</h5>
         <div class="card-body">
           @include('spending.table')
+        </div>
+      </div>
+
+      <div class="card">
+        <h5 class="card-header">Spending Breakdown</h5>
+        <div class="card-body">
+          @include('spending.dashTable')
         </div>
       </div>
 </div>
